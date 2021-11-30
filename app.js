@@ -4,6 +4,18 @@
 const form = document.querySelector("form")
 form.addEventListener("submit", addTask)
 
+// Task list
+const taskList = document.querySelector("ul");
+taskList.addEventListener("click", delTask)
+
+//delTask
+function delTask(event){
+    if(event.target.textContent === "x"){
+        if(confirm("Do you really want to delete this task?")){
+            event.target.parentElement.remove()
+        }
+    }
+}
 //addTask function
 function addTask(event){
     // get task value from form input
@@ -17,6 +29,16 @@ function addTask(event){
     // add text to element
     const text = document.createTextNode(task)
     li.appendChild(text)
+    // create link
+    const link = document.createElement("a")
+    // add css style
+    link.className = "secondary-content"
+    // add text
+    link.appendChild(document.createTextNode("x"))
+    // add href attribute
+    link.setAttribute("href", "#")
+    // add link to list items
+    li.appendChild(link)
     // add li to taskList
    taskList.appendChild(li)
     // clear form input value
